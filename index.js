@@ -1,26 +1,10 @@
-const fs = require('fs')
-const Tea = require('./src/tea')
+const Tea = require('./src/tea.js')
 
-const tea = new Tea();
+const data = 'Привет, мир!?'
+const password = 'GagaGA113'
+const tea = new Tea()
+const encrypted = tea.encrypt(data, password)
+const decrypted = tea.decrypt(encrypted, password)
 
-const params = {
-  encrypted: 'encrypted.txt',
-  decrypted: 'decrypted.txt',
-  encoding: 'utf8',
-  data: 'Какой-то сложный текст: привет, мир!?',
-  password: 'gagaga1'
-}
-
-function encrypt(params) {
-  const encrypted = tea.encrypt(params.data, params.password)
-  fs.writeFileSync(params.encrypted, encrypted, params.encoding)
-}
-
-function decrypt(params) {
-  const encrypted = fs.readFileSync(params.encrypted, params.encoding)
-  const decrypted = tea.decrypt(encrypted, params.password)
-  fs.writeFileSync(params.decrypted, decrypted)
-}
-
-encrypt(params)
-decrypt(params)
+console.log('encrypted:', encrypted)
+console.log('decrypted:', decrypted)
